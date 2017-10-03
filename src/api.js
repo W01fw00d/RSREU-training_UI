@@ -1,4 +1,4 @@
-import { concatUrlParams, getActiveFilter } from './utils';
+import { getActiveFilter, concatUrlParams } from './utils';
 
 const PORT = '8080';
 
@@ -25,12 +25,10 @@ export const api = {
           { id: 3, title: 'Most Popular', active: false },
           { id: 4, title: 'Free Books', active: false },
         ],
-        
         params = {
           search: search || null,
           activeFilter: getActiveFilter({ filters })
         };
-        
         fetch(`http://localhost:${PORT}/api/books?` + concatUrlParams(params))
           .then(response => {
             const books = [
