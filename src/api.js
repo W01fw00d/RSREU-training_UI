@@ -1,4 +1,4 @@
-import { concatUrlParams } from './utils';
+import { concatUrlParams, getActiveFilter } from './utils';
 
 const PORT = '8080';
 
@@ -24,9 +24,14 @@ export const api = {
           { id: 2, title: 'Most Recent', active: false },
           { id: 3, title: 'Most Popular', active: false },
           { id: 4, title: 'Free Books', active: false },
-        ];
-
-        fetch(`http://localhost:${PORT}/api/books?`)
+        ],
+        
+        params = {
+          search: search || null,
+          activeFilter: getActiveFilter({ filters })
+        };
+        
+        fetch(`http://localhost:${PORT}/api/books?` + concatUrlParams(params))
           .then(response => {
             const books = [
               { id: 1, title: 'Jewels of Nizam', author: 'Geeta Devi', img: 'JewelsOfNizam.jpg', stars: 5, labels: 'label1' },
