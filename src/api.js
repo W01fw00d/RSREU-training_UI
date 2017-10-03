@@ -20,14 +20,15 @@ export const api = {
     fetch(`http://localhost:${PORT}/api/filters`)
       .then(response => {
         const filters = [
-          { id: 1, title: 'All Books', active: true },
-          { id: 2, title: 'Most Recent', active: false },
-          { id: 3, title: 'Most Popular', active: false },
-          { id: 4, title: 'Free Books', active: false },
-        ],
-        params = {
+          { type: 'all', title: 'All Books', active: true },
+          { type: 'recent', title: 'Most Recent', active: false },
+          { type: 'popular', title: 'Most Popular', active: false },
+          { type: 'free', title: 'Free Books', active: false },
+        ];
+        const params = {
           search: search || null,
-          activeFilter: getActiveFilter({ filters })
+          activeCategory: null,
+          activeFilter: getActiveFilter({ filters }),
         };
         fetch(`http://localhost:${PORT}/api/books?` + concatUrlParams(params))
           .then(response => {
